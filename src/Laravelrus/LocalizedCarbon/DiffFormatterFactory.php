@@ -1,22 +1,41 @@
-<?php namespace Laravelrus\LocalizedCarbon;
+<?php
+
+namespace Laravelrus\LocalizedCarbon;
 
 use Laravelrus\LocalizedCarbon\DiffFormatters\DiffFormatterInterface;
 
-class DiffFormatterFactory {
-    protected $formatters = array();
-    protected $aliases = array();
+class DiffFormatterFactory
+{
+    protected $formatters = [];
+    protected $aliases = [];
 
-    public function extend($language, $formatter) {
+    /**
+     * @param $language
+     * @param $formatter
+     */
+    public function extend($language, $formatter)
+    {
         $language = strtolower($language);
         $this->formatters[$language] = $formatter;
     }
 
-    public function alias($alias, $language) {
+    /**
+     * @param $alias
+     * @param $language
+     */
+    public function alias($alias, $language)
+    {
         $language = strtolower($language);
         $this->aliases[$alias] = $language;
     }
 
-    public function get($language) {
+    /**
+     * @param $language
+     * @return mixed
+     * @throws \Exception
+     */
+    public function get($language)
+    {
         $language = strtolower($language);
 
         if (isset($this->aliases[$language])) {
@@ -52,14 +71,23 @@ class DiffFormatterFactory {
         return $formatter;
     }
 
-    protected function getFormatterClassName($language) {
+    /**
+     * @param $language
+     * @return string
+     */
+    protected function getFormatterClassName($language)
+    {
         $name = ucfirst(strtolower($language));
         $name = 'Laravelrus\\LocalizedCarbon\\DiffFormatters\\' . $name . 'DiffFormatter';
 
         return $name;
     }
 
-    protected function getFallbackLanguage() {
+    /**
+     * @return mixed
+     */
+    protected function getFallbackLanguage()
+    {
         return \Config::get('app.fallback_locale');
     }
 } 

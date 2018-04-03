@@ -1,12 +1,15 @@
-<?php namespace Laravelrus\LocalizedCarbon\Traits;
+<?php
+
+namespace Laravelrus\LocalizedCarbon\Traits;
 
 use Laravelrus\LocalizedCarbon\LocalizedCarbon;
 
-trait LocalizedEloquentTrait {
+trait LocalizedEloquentTrait
+{
     /**
      * Return a timestamp as DateTime object.
      *
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return \Laravelrus\LocalizedCarbon\LocalizedCarbon
      */
     protected function asDateTime($value)
@@ -16,8 +19,10 @@ trait LocalizedEloquentTrait {
         // it already is one, which wouldn't be fulfilled by the DateTime check.
         if ($value instanceof LocalizedCarbon) {
             return $value;
-        } else if ($value instanceof Carbon) {
-            return LocalizedCarbon::instance($value);
+        } else {
+            if ($value instanceof Carbon) {
+                return LocalizedCarbon::instance($value);
+            }
         }
 
         // If the value is already a DateTime instance, we will just skip the rest of

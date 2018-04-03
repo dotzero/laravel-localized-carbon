@@ -7,7 +7,14 @@ use Laravelrus\LocalizedCarbon\DiffFormatters\DiffFormatterInterface;
 
 class DiffFormatterFactory
 {
+    /**
+     * @var array List of formatters
+     */
     protected $formatters = [];
+
+    /**
+     * @var array List of language aliases
+     */
     protected $aliases = [];
 
     /**
@@ -24,8 +31,10 @@ class DiffFormatterFactory
     }
 
     /**
-     * @param $language
-     * @param $formatter
+     * Extends list of formatters
+     *
+     * @param string $language
+     * @param \Closure|DiffFormatterInterface $formatter
      */
     public function extend($language, $formatter)
     {
@@ -34,8 +43,10 @@ class DiffFormatterFactory
     }
 
     /**
-     * @param $alias
-     * @param $language
+     * Extends list of language aliases
+     *
+     * @param string $alias
+     * @param string $language
      */
     public function alias($alias, $language)
     {
@@ -44,7 +55,7 @@ class DiffFormatterFactory
     }
 
     /**
-     * @param $language
+     * @param string $language
      * @return mixed
      * @throws \Exception
      */
@@ -86,7 +97,7 @@ class DiffFormatterFactory
     }
 
     /**
-     * @param $language
+     * @param string $language
      * @return string
      */
     protected function getFormatterClassName($language)
@@ -102,6 +113,6 @@ class DiffFormatterFactory
      */
     protected function getFallbackLanguage()
     {
-        return \Config::get('app.fallback_locale');
+        return data_get($this->app, 'config.app.fallback_locale');
     }
 }

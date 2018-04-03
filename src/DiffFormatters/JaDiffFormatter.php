@@ -1,10 +1,12 @@
-<?php namespace Laravelrus\LocalizedCarbon\DiffFormatters;
+<?php
 
+namespace Laravelrus\LocalizedCarbon\DiffFormatters;
 
-class JaDiffFormatter implements DiffFormatterInterface {
-
-    public function format($isNow, $isFuture, $delta, $unit) {
-        $unitStr = \Lang::choice("localized-carbon::units." . $unit, $delta, array(), 'ja');
+class JaDiffFormatter implements DiffFormatterInterface
+{
+    public function format($isNow, $isFuture, $delta, $unit)
+    {
+        $unitStr = \Lang::choice("localized-carbon::units." . $unit, $delta, [], 'ja');
         $txt = $delta . ' ' . $unitStr;
 
         if ($isNow) {

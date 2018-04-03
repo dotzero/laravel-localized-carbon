@@ -1,10 +1,12 @@
-<?php namespace Laravelrus\LocalizedCarbon\DiffFormatters;
+<?php
+
+namespace Laravelrus\LocalizedCarbon\DiffFormatters;
 
 class BgDiffFormatter implements DiffFormatterInterface
 {
     public function format($isNow, $isFuture, $delta, $unit)
     {
-        $unitStr = \Lang::choice("localized-carbon::units." . $unit, $delta, array(), 'bg');
+        $unitStr = \Lang::choice("localized-carbon::units." . $unit, $delta, [], 'bg');
 
         $txt = $delta . ' ' . $unitStr;
 

@@ -1,12 +1,13 @@
-<?php namespace Laravelrus\LocalizedCarbon\DiffFormatters;
+<?php
 
+namespace Laravelrus\LocalizedCarbon\DiffFormatters;
 
-class PtDiffFormatter implements DiffFormatterInterface {
+class PtDiffFormatter implements DiffFormatterInterface
+{
+    public function format($isNow, $isFuture, $delta, $unit)
+    {
+        $unitStr = \Lang::choice("localized-carbon::units." . $unit, $delta, [], 'pt');
 
-    public function format($isNow, $isFuture, $delta, $unit) {
-        
-        $unitStr = \Lang::choice("localized-carbon::units." . $unit, $delta, array(), 'pt');
-        
         $txt = $delta . ' ' . $unitStr;
 
         if ($isNow) {

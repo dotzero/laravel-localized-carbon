@@ -1,9 +1,11 @@
-<?php namespace Laravelrus\LocalizedCarbon\DiffFormatters;
+<?php
 
+namespace Laravelrus\LocalizedCarbon\DiffFormatters;
 
-class EnDiffFormatter implements DiffFormatterInterface {
-
-    public function format($isNow, $isFuture, $delta, $unit) {
+class EnDiffFormatter implements DiffFormatterInterface
+{
+    public function format($isNow, $isFuture, $delta, $unit)
+    {
         $txt = $delta . ' ' . $unit;
         $txt .= $delta == 1 ? '' : 's';
 

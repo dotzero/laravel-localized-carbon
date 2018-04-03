@@ -1,9 +1,11 @@
-<?php namespace Laravelrus\LocalizedCarbon\DiffFormatters;
+<?php
 
+namespace Laravelrus\LocalizedCarbon\DiffFormatters;
 
-class BnDiffFormatter implements DiffFormatterInterface {
-
-    public function format($isNow, $isFuture, $delta, $unit) {
+class BnDiffFormatter implements DiffFormatterInterface
+{
+    public function format($isNow, $isFuture, $delta, $unit)
+    {
         $txt = $this->translateNumber($delta) . ' ' . $unit;
 
         if ($isNow) {
@@ -15,16 +17,16 @@ class BnDiffFormatter implements DiffFormatterInterface {
         return $txt;
     }
 
-    public static function translateNumber($number) {
-        if(is_numeric($number)) {
+    public static function translateNumber($number)
+    {
+        if (is_numeric($number)) {
             $arrNumber = str_split($number);
-        }
-        else {
+        } else {
             return $number;
         }
         $transNumber = [];
-        foreach($arrNumber as $number) {
-            switch($number) {
+        foreach ($arrNumber as $number) {
+            switch ($number) {
                 case '.':
                     array_push($transNumber, '. ');
                     break;

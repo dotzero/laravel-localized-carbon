@@ -1,21 +1,23 @@
-<?php namespace Laravelrus\LocalizedCarbon\DiffFormatters;
+<?php
+
+namespace Laravelrus\LocalizedCarbon\DiffFormatters;
 
 class TrDiffFormatter implements DiffFormatterInterface
 {
-	public function format($isNow, $isFuture, $delta, $unit)
-	{
-		$unitStr = \Lang::choice("localized-carbon::units." . $unit, $delta, array(), 'tr');
+    public function format($isNow, $isFuture, $delta, $unit)
+    {
+        $unitStr = \Lang::choice("localized-carbon::units." . $unit, $delta, [], 'tr');
 
-		$txt = $delta . ' ' . $unitStr;
+        $txt = $delta . ' ' . $unitStr;
 
-		if ($isNow) {
-			$txt .= " " . (($isFuture) ? 'sonra ' : 'önce ');
-			
-			return $txt;
-		}
+        if ($isNow) {
+            $txt .= " " . (($isFuture) ? 'sonra ' : 'önce ');
 
-		$txt .= ($isFuture) ? ' sonrası' : ' öncesi';
+            return $txt;
+        }
 
-		return $txt;
-	}
+        $txt .= ($isFuture) ? ' sonrası' : ' öncesi';
+
+        return $txt;
+    }
 }

@@ -35,7 +35,7 @@ class LocalizedCarbonServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/../../lang', 'localized-carbon');
 
         $this->publishes([
-            __DIR__ . '/../../lang' => base_path('resources/lang'),
+            __DIR__ . '/lang' => base_path('resources/lang'),
         ]);
     }
 

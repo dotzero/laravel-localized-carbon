@@ -2,12 +2,11 @@
 
 namespace Laravelrus\Tests\LocalizedCarbon;
 
-use GrahamCampbell\TestBench\AbstractPackageTestCase;
 use GrahamCampbell\TestBenchCore\FacadeTrait;
 use Laravelrus\LocalizedCarbon\DiffFactoryFacade;
 use Laravelrus\LocalizedCarbon\DiffFormatterFactory;
 
-class DiffFactoryFacadeTest extends AbstractPackageTestCase
+class DiffFactoryFacadeTest extends AbstractTestCase
 {
     use FacadeTrait;
 

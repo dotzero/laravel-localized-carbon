@@ -2,6 +2,7 @@
 
 namespace Laravelrus\LocalizedCarbon;
 
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
 
 class LocalizedCarbonServiceProvider extends ServiceProvider
@@ -20,8 +21,8 @@ class LocalizedCarbonServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('difffactory', function () {
-            return new DiffFormatterFactory();
+        $this->app->singleton('difffactory', function (Container $app) {
+            return new DiffFormatterFactory($app);
         });
     }
 
@@ -32,7 +33,7 @@ class LocalizedCarbonServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../../lang', 'localized-carbon');
+        $this->loadTranslationsFrom(__DIR__ . '/lang', 'localized-carbon');
 
         $this->publishes([
             __DIR__ . '/lang' => base_path('resources/lang'),

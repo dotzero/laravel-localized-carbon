@@ -2,12 +2,26 @@
 
 namespace Laravelrus\LocalizedCarbon;
 
+use Illuminate\Contracts\Container\Container;
 use Laravelrus\LocalizedCarbon\DiffFormatters\DiffFormatterInterface;
 
 class DiffFormatterFactory
 {
     protected $formatters = [];
     protected $aliases = [];
+
+    /**
+     * @var Container
+     */
+    protected $app;
+
+    /**
+     * @param Container $app
+     */
+    public function __construct(Container $app)
+    {
+        $this->app = $app;
+    }
 
     /**
      * @param $language
@@ -46,18 +60,18 @@ class DiffFormatterFactory
             $formatter = $this->formatters[$language];
 
             if (is_string($formatter)) {
-                $formatter = \App::make($formatter);
+                $formatter = $this->app->make($formatter);
             }
         } else {
             $formatterClass = $this->getFormatterClassName($language);
             try {
-                $formatter = \App::make($formatterClass);
+                $formatter = $this->app->make($formatterClass);
             } catch (\Exception $e) {
                 // In case desired formatter could not be loaded
                 // load a formatter for application's fallback locale
                 $language = $this->getFallbackLanguage();
                 $formatterClass = $this->getFormatterClassName($language);
-                $formatter = \App::make($formatterClass);
+                $formatter = $this->app->make($formatterClass);
             }
         }
 

@@ -2,6 +2,7 @@
 
 namespace Laravelrus\LocalizedCarbon\DiffFormatters;
 
-interface DiffFormatterInterface {
+interface DiffFormatterInterface
+{
     public function format($isNow, $isFuture, $delta, $unit);
 }

@@ -20,7 +20,7 @@ trait LocalizedEloquentTrait
         if ($value instanceof LocalizedCarbon) {
             return $value;
         } else {
-            if ($value instanceof Carbon) {
+            if ($value instanceof \Carbon\Carbon) {
                 return LocalizedCarbon::instance($value);
             }
         }

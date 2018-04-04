@@ -33,7 +33,8 @@ class DiffFormatterFactoryTest extends AbstractTestCase
     public function testGet($language, $expected)
     {
         $factory = $this->getFactory();
-        $factory->alias('zz', 'ru');
+        $factory->extend('xx', 'Laravelrus\\LocalizedCarbon\\DiffFormatters\\EsDiffFormatter');
+        $factory->alias('yy', 'ru');
 
         try {
             $formatter = $factory->get($language);
@@ -54,13 +55,18 @@ class DiffFormatterFactoryTest extends AbstractTestCase
             'expected' => DiffFormatters\FrDiffFormatter::class,
         ];
 
+        yield 'extend' => [
+            'language' => 'xx',
+            'expected' => DiffFormatters\EsDiffFormatter::class,
+        ];
+
         yield 'alias' => [
-            'language' => 'zz',
+            'language' => 'yy',
             'expected' => DiffFormatters\RuDiffFormatter::class,
         ];
 
         yield 'fallback' => [
-            'language' => 'yy',
+            'language' => 'zz',
             'expected' => DiffFormatters\EnDiffFormatter::class,
         ];
     }

@@ -34,7 +34,7 @@ class DiffFormatterFactory
      * Extends list of formatters
      *
      * @param string $language
-     * @param \Closure|DiffFormatterInterface $formatter
+     * @param \Closure|DiffFormatterInterface|string $formatter
      */
     public function extend($language, $formatter)
     {

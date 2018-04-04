@@ -14,7 +14,7 @@ class LocalizedCarbon extends Carbon
      *
      * @return string
      */
-    public static function determineLanguage()
+    public function determineLanguage()
     {
         return \App::getLocale();
     }
@@ -48,8 +48,7 @@ class LocalizedCarbon extends Carbon
     public function diffForHumans($other = null, $formatter = null, $short = false, $parts = 1)
     {
         if ($formatter === null) {
-            $language = self::determineLanguage();
-            $formatter = DiffFactoryFacade::get($language);
+            $formatter = DiffFactoryFacade::get($this->determineLanguage());
         } elseif (is_string($formatter)) {
             $formatter = DiffFactoryFacade::get($formatter);
         }

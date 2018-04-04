@@ -22,7 +22,7 @@ class RuDiffFormatter implements DiffFormatterInterface
             if ($isFuture) {
                 $txt = "спустя " . $delta . " " . $unitStr;
             } else {
-                $txt = "за " . " " . $delta . " " . $unitStr . " до";
+                $txt = "за " . $delta . " " . $unitStr . " до";
             }
         }
         return $txt;

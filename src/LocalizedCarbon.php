@@ -10,7 +10,9 @@ class LocalizedCarbon extends Carbon
     const DEFAULT_LANGUAGE = 'en';
 
     /**
-     * @return mixed
+     * Get the current application locale.
+     *
+     * @return string
      */
     public static function determineLanguage()
     {
@@ -18,10 +20,29 @@ class LocalizedCarbon extends Carbon
     }
 
     /**
-     * @param null $other
-     * @param null $formatter
+     * Get the difference in a human readable format in the current locale.
+     *
+     * When comparing a value in the past to default now:
+     * 1 hour ago
+     * 5 months ago
+     *
+     * When comparing a value in the future to default now:
+     * 1 hour from now
+     * 5 months from now
+     *
+     * When comparing a value in the past to another value:
+     * 1 hour before
+     * 5 months before
+     *
+     * When comparing a value in the future to another value:
+     * 1 hour after
+     * 5 months after
+     *
+     * @param \Carbon\Carbon|\DateTimeInterface|mixed $other
+     * @param string|null $formatter
      * @param bool $short
      * @param int $parts
+     *
      * @return string
      */
     public function diffForHumans($other = null, $formatter = null, $short = false, $parts = 1)
@@ -82,7 +103,11 @@ class LocalizedCarbon extends Carbon
     }
 
     /**
+     * Format the instance with the current locale.  You can set the current
+     * locale using setlocale() http://php.net/setlocale.
+     *
      * @param string $format
+     *
      * @return string
      */
     public function formatLocalized($format = self::COOKIE)

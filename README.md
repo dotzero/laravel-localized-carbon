@@ -1,10 +1,7 @@
-# Maintainers needed
-Sorry, I have not much time supporting this repo. Also I rarely work with Laravel now, so new maintainers are needed.
-
-# Localized Carbon
-
-for **L4** use **1.4** branch   
-for **L5** use **dev-master**
+# A localizable version of Carbon for Laravel 5
+[![Build Status](https://travis-ci.org/dotzero/laravel-localized-carbon.svg?branch=master)](https://travis-ci.org/dotzero/laravel-localized-carbon)
+[![Latest Stable Version](https://poser.pugx.org/dotzero/laravel-localized-carbon/version)](https://packagist.org/packages/dotzero/laravel-localized-carbon)
+[![License](https://poser.pugx.org/dotzero/laravel-localized-carbon/license)](https://packagist.org/packages/dotzero/laravel-localized-carbon)
 
 See also [localized documentation](docs)
 

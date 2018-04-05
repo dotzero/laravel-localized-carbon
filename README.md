@@ -3,22 +3,61 @@
 [![Latest Stable Version](https://poser.pugx.org/dotzero/laravel-localized-carbon/version)](https://packagist.org/packages/dotzero/laravel-localized-carbon)
 [![License](https://poser.pugx.org/dotzero/laravel-localized-carbon/license)](https://packagist.org/packages/dotzero/laravel-localized-carbon)
 
+Localized Carbon is an extension of a popular Carbon package, designed specially for Laravel 5 framework.
+By localization I mean its `diffForHumans` function, which returns a human-readable string of time interval.
+This package also supports genitive months by introducing the `%f` key in `formatLocalized` method.
+
+## Installation
+
+Require this package with [Composer](https://getcomposer.org/) using the following command:
+
+```bash
+$ composer require dotzero/laravel-localized-carbon
+```
+
+Next, add package's Service Provider to `app/config/app.php` in `providers` section:
+
+```php
+'providers' => [
+    // ...
+    Laravelrus\LocalizedCarbon\LocalizedCarbonServiceProvider::class,
+],
+```
+
+After that you may want to add some Aliases (`aliases` section of the same config):
+
+```php
+'aliases' => [
+    // ...
+    'LocalizedCarbon' => Laravelrus\LocalizedCarbon\LocalizedCarbon::class,
+    'DiffFormatter'   => Laravelrus\LocalizedCarbon\DiffFactoryFacade::class,
+],
+```
+
 See also [localized documentation](docs)
 
-+ [Introduction](#intro)
 + [Usage](#usage)
 + [Supported languages](#languages)
 + [Installation](#installation)
 + [Extending](#extending)
 + [Contributing](#contributing)
 
-<a name="intro"></a>
-## Introduction
-
-Localized Carbon is an extension of a popular Carbon package, designed specially for Laravel framework. By localization I mean its `diffForHumans` function, which returns a human-readable string of time interval. This package also supports genitive months by introducing the "%f" key in `formatLocalized` method.
-
 <a name="usage"></a>
 ## Usage
+
+Note that `DiffFormatter` will only be used for extending default localizations. See [extending Localized Carbon](#extending).
+
+If you want to use the power of `LocalizedCarbon` the same way as you did with original `Carbon` in your models, you may want to use supplied trait for this in your models:
+
+```
+use \Laravelrus\LocalizedCarbon\Traits\LocalizedEloquentTrait;
+```
+
+In this case `LocalizedCarbon` will be used for all dates in your Eloquent model instead of original `Carbon`.
+
+Note that this method is actual for PHP versions 5.4 and higher.
+
+If you are still using PHP 5.3.7 you can substitute Laravel's Eloquent class by `Laravelrus\LocalizedCarbon\Models\Eloquent` supplied with this package. To do this you can either inherit this class directly, or make an alias to it instead of originial Eloquent in `app\config\app.php`.
 
 This package provides a `LocalizedCarbon` class which inherits original Carbon, so its usage is absolutely the same as original Carbon's.
 
@@ -62,38 +101,6 @@ Current version of Localized Carbon ships with these localizations:
 
 
 But it is extendable, so you may write and use your own localization without altering the contents of the package. See [extending Localized Carbon](#extending).
-
-<a name="installation"></a>
-## Installation
-
-Add the following requirement to your `composer.json`: `"laravelrus/localized-carbon": "1.*"` and then run `composer update`.
-
-Next, add package's Service Provider to `app/config/app.php` in `providers` section:
-
-```
-'Laravelrus\LocalizedCarbon\LocalizedCarbonServiceProvider',
-```
-
-After that you may want to add some Aliases (`aliases` section of the same config):
-
-```
-'LocalizedCarbon' => Laravelrus\LocalizedCarbon\LocalizedCarbon::class,
-'DiffFormatter'   => Laravelrus\LocalizedCarbon\DiffFactoryFacade::class,
-```
-
-Note that `DiffFormatter` will only be used for extending default localizations. See [extending Localized Carbon](#extending).
-
-If you want to use the power of `LocalizedCarbon` the same way as you did with original `Carbon` in your models, you may want to use supplied trait for this in your models:
-
-```
-use \Laravelrus\LocalizedCarbon\Traits\LocalizedEloquentTrait;
-```
-
-In this case `LocalizedCarbon` will be used for all dates in your Eloquent model instead of original `Carbon`.
-
-Note that this method is actual for PHP versions 5.4 and higher.
-
-If you are still using PHP 5.3.7 you can substitute Laravel's Eloquent class by `Laravelrus\LocalizedCarbon\Models\Eloquent` supplied with this package. To do this you can either inherit this class directly, or make an alias to it instead of originial Eloquent in `app\config\app.php`.
 
 <a name="extending"></a>
 ## Extending Localized Carbon
